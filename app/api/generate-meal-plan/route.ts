@@ -1,4 +1,4 @@
-import { anthropic, MODEL } from "@/lib/anthropic";
+import { getAIClient, MODEL } from "@/lib/anthropic";
 import { MEAL_PLAN_GENERATOR_PROMPT } from "@/lib/prompts";
 
 export const runtime = "nodejs";
@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       });
     }
 
-    const stream = await anthropic.chat.completions.create({
+    const stream = await getAIClient().chat.completions.create({
       model: MODEL,
       max_tokens: 4000,
       stream: true,
